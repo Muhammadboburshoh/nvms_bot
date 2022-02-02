@@ -7,5 +7,6 @@ module.exports = {
     host: env.HOST,
     database: env.DATABASE,
     user: env.USER,
-    password: env.PASSWORD
+    password: env.PASSWORD,
+    site_host: env.SITE_HOST
 }
