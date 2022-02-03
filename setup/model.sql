@@ -36,6 +36,10 @@ create table admins(
     username varchar(40) not null,
     password varchar(64) not null
 );
+
+alter table admins add column school varchar(40) not null;
+ALTER TABLE admins 
+ADD COLUMN school VARCHAR(40) NOT NULL;
 create unique index username_index on admins(lower(username));
 
 create table schools(
@@ -51,10 +55,12 @@ create table parents(
     phone varchar(20) not null,
     password varchar(64) not null,
     telegram_id int,
-    step smallint not null default 0
+    step smallint not null default 0,
+    school_id int not null references schools(id)
 );
 create unique index phone_index on parents(phone);
 
 create extension pgcrypto;
 
-insert into admins (username, password, role) values ('admin', crypt('1234', gen_salt('bf')), 1);
+insert into admins (username, password, role, school) values ('admin', crypt('1234', gen_salt('bf')), 1, 118);
+insert into schools (name, login, password) values ('118-maktab', "118", crypt('111', gen_salt('bf')));

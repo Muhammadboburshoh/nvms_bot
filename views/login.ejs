@@ -16,23 +16,62 @@
                     <div>
                         <p class="text-center">Tashkilot username va passwordini kiriting!</p>
                     </div>
-                    <div class="form-data" v-if="!submitted">
-                        <div class="forms-inputs mb-4 input"> <span>Username</span> <input autocomplete="off" type="text" v-model="email" v-bind:class="{'form-control':true, 'is-invalid' : !validEmail(email) && emailBlured}" v-on:blur="emailBlured = true">
-                            <div class="invalid-feedback">A valid email is required!</div>
+                    <div class="form-data">
+                        <div class="forms-inputs mb-4 input"> <span>Username</span> <input autocomplete="off" id="login-input" type="text">
                         </div>
-                        <div class="forms-inputs mb-4 input"> <span>Password</span> <input autocomplete="off" type="password" v-model="password" v-bind:class="{'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured}" v-on:blur="passwordBlured = true">
-                            <div class="invalid-feedback">Password must be 8 character!</div>
+                        <div class="forms-inputs mb-4 input"> <span>Password</span> <input autocomplete="off" id="password-input" type="password">
                         </div>
-                        <div class="mb-3"> <button v-on:click.stop.prevent="submit" class="btn btn-dark w-100">Login</button> </div>
+                        <div class="mb-3"> <button id="submit-button" class="btn btn-dark w-100">Login</button> </div>
                     </div>
-                    <!-- <div class="success-data" v-else>
-                        <div class="text-center d-flex flex-column"> <i class='bx bxs-badge-check'></i> <span class="text-center fs-1">You have been logged in <br> Successfully</span> </div>
-                    </div> -->
                 </div>
             </div>
         </div>
     </div>
-    
-    <script src="<%=site_host%>/javascripts/login.js"></script>
+
+    <script>
+        const button = document.getElementById("submit-button")
+        const loginInput = document.getElementById("login-input")
+        const passwordInput = document.getElementById("password-input")
+
+        button.addEventListener("click", async () => {
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            const raw = JSON.stringify({
+            "login": loginInput.value,
+            "password": passwordInput.value
+            });
+
+            const requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+            };
+
+            try {
+                let response = await fetch("http://localhost:3000/login", requestOptions)
+                if(response.status >= 200 && response.status <= 299) {
+                    response = await response.json()
+
+                    if(response.accessToken) {
+                        window.localStorage.setItem('__auth', JSON.stringify({
+                            isLoggedIn: true,
+                            user: response.user.login,
+                            accessToken: response.accessToken
+                        }))
+                    }
+                }
+                else {
+                    alert(`Login yoki parol xato! \nQaytadan kitirib ko'ring.`)
+                }
+            }
+            catch(e) {
+                console.log(e);
+                alert(e)
+            }
+        });
+
+    </script>
 </body>
 </html>

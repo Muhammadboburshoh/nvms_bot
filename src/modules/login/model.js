@@ -3,15 +3,15 @@ const { row } = require("../../../util/db")
 const adminLoginSQL = `
     select
         id,
-        role,
-        username
-    from admins
+        name,
+        login
+    from schools
         where
-        username = $1 and password = crypt($2, password)
+        login = $1 and password = crypt($2, password)
 `
 
-const adminLogin = ({username, password}) => {
-    return row(adminLoginSQL, username, password)
+const adminLogin = ({login, password}) => {
+    return row(adminLoginSQL, login, password)
 }
 
 
