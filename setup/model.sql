@@ -38,8 +38,7 @@ create table admins(
 );
 
 alter table admins add column school varchar(40) not null;
-ALTER TABLE admins 
-ADD COLUMN school VARCHAR(40) NOT NULL;
+ALTER TABLE admins RENAME COLUMN username TO login;
 create unique index username_index on admins(lower(username));
 
 create table schools(
@@ -48,6 +47,7 @@ create table schools(
     login varchar(40) not null,
     password varchar(64) not null
 );
+ALTER TABLE schools RENAME COLUMN name TO school;
 create unique index login_index on schools(lower(login));
 
 create table parents(
