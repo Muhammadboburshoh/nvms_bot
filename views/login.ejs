@@ -38,15 +38,14 @@
             myHeaders.append("Content-Type", "application/json");
 
             const raw = JSON.stringify({
-            "login": loginInput.value,
-            "password": passwordInput.value
+                "login": loginInput.value,
+                "password": passwordInput.value
             });
-
             const requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
             };
 
             try {
@@ -57,12 +56,13 @@
                     if(response.accessToken) {
                         window.localStorage.setItem('__auth', JSON.stringify({
                             isLoggedIn: true,
+                            name: response.user.name,
                             user: response.user.login,
                             accessToken: response.accessToken
                         }))
                     }
 
-                    self.location="/";
+                    self.location="/"
                 }
                 else {
                     alert(`Login yoki parol xato! \nQaytadan kitirib ko'ring.`)
