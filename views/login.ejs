@@ -62,6 +62,21 @@
                         }))
                     }
 
+                    var headers = new Headers();
+                    headers.append("access_token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IjExOC1tYWt0YWIiLCJsb2dpbiI6IjExOCIsImlhdCI6MTY0NDUwMjA3OSwiZXhwIjoxNjQ4MTAyMDc5fQ.pxNnQrRYp5RlO25pXUts3jFLDI4x1Je8JT9GQBp47QI");
+                    headers.append("Authorization", "Basic YWRtaW46MTIzNDU2");
+
+                    var reqOptions = {
+                        method: 'GET',
+                        headers: headers,
+                        redirect: 'follow'
+                    };
+
+                    fetch("http://localhost:3002", reqOptions)
+                        .then(response => response.text())
+                        .then(result => console.log(result))
+                        .catch(error => console.log('error', error));
+
                     self.location="/"
                 }
                 else {
