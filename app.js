@@ -4,7 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-// const indexRouter = require('./routes/index');
 const loginRouter = require("./src/modules/login/controllers")
 const homeRouter = require("./src/modules/parrents/controllers")
 
@@ -29,10 +28,9 @@ app.use((_, res, next) => {
   next()
 })
 
-
-// app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/', homeRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

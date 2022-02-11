@@ -19,10 +19,12 @@ router.post("/", async (req, res) => {
 
     if(user) {
         const accessToken = sign(user)
-        res.status(201).send({ user, accessToken })
+        res.cookie('access_token', accessToken)
+        res.redirect('/')
     }
     else {
-        res.status(401).end()
+        res.status(401)
+        res.redirect('/')
     }
 })
 
