@@ -15,11 +15,11 @@ router.get("/", async(req, res) => {
     Admin Login
 */
 router.post("/", async (req, res) => {
-    const user = await admin.schoolLogin(req.body)
+    const school = await admin.schoolLogin(req.body)
 
-    if(user) {
-        const accessToken = sign(user)
-        res.cookie('access_token', accessToken)
+    if(school) {
+        const accessToken = sign(school)
+        res.cookie('__auth', {access_token: accessToken, school})
         res.redirect('/')
     }
     else {

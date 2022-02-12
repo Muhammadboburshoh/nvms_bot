@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="<%=site_host%>/stylesheets/header.css">
   <title>Home page</title>
 </head>
+
 <body>
 
   <div class="main-wrapper">
@@ -16,37 +18,39 @@
         <a class="sidebar_logo" href="/">
           <img class="sidebar_logo-img" src="<%=site_host%>/images/logo.png" width="140" height="35" alt="site-logo" />
         </a>
-    
+
         <nav class="sidebar_nav">
           <ul class="sidebar_list">
             <li class="sidebar_item">
               <a class="sidebar_link" href="#">
-              <span class="sidebar_icon">
-                  <img class="first_icon" src="<%=site_host%>/images/parrent.png" width="=30" height="30" alt="" />
-              </span>
-                Ota onalar
+                <span class="sidebar_icon">
+                  <img class="first_icon" src="<%=site_host%>/images/classes.png" width="=30" height="30" alt="" />
+                </span>
+                Sinflar
               </a>
             </li>
             <li class="sidebar_item">
               <a class="sidebar_link" to="/clients">
-              <span class="sidebar_icon">
-                  <img class="first_icon" src="<%=site_host%>/images/plas.png" width="=20" height="20" alt="" />
+                <span class="sidebar_icon">
+                  <img class="first_icon" src="<%=site_host%>/images/parrent.png" width="=30" height="30" alt="" />
                 </span>
-                Ota ona qo'shish
+                Ota onalar
               </a>
             </li>
           </ul>
         </nav>
       </section>
     </div>
-  
+
     <div class="content-wrapper">
       <header class="header">
-    
+
         <div class="header__right">
           <div class="profile">
             <div class="profile__info">
-              <span class="profile__name"><%= name %> </span>
+              <span class="profile__name">
+                <%= name %>
+              </span>
             </div>
             <button class="profile__btn">
               <img src="<%=site_host%>/images/Profile.svg" width="35" height="30" alt="" />
@@ -60,7 +64,43 @@
           </div>
         </div>
       </header>
+
+      <section class="main-content-wrapper">
+        <form class="category__create-form" action="/class" method="POST" enctype="application/x-www-form-urlencoded">
+          <label for="create-category">Sinf qo'shing: </label>
+          <input name="class_number" class="category__create-input" type="text" placeholder="Sinf nomi..." required />
+          <button class="category__create-btn" type="submit">Yaratish</button>
+        </form>
+
+        <table class="categories__table">
+          <thead>
+            <tr class="categories__thead-tr">
+              <th class="categories__thead-th">ID</th>
+              <th class="categories__thead-th">Sinf nomi</th>
+              <th class="categories__thead-th">Tahrirlash</th>
+              <th class="categories__thead-th">O'chirish</th>
+            </tr>
+          </thead>
+          <tbody class="classes">
+
+
+            <!-- <tr class="categories__tbody-tr">
+              <td class="categories__tbody-td">1</td>
+              <td class="categories__tbody-td categories__tbody-td-link-main">1</td>
+              <td class="categories__tbody-td">
+                <button class="categories__edit-btn">tahrirlash</button>
+              </td>
+              <td class="categories__tbody-td">
+                <button class="categories__delete-btn">o'chirish</button>
+              </td>
+            </tr> -->
+
+
+
+          </tbody>
+        </table>
     </div>
+  </div>
   </div>
 
 
@@ -68,4 +108,5 @@
 
   <script src="<%=site_host%>/javascripts/javascript.js"></script>
 </body>
+
 </html>
