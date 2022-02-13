@@ -502,4 +502,11 @@ body{
   background-color: #0b635b;
 }
 
+.categories__edit-succesiful {
+  background-color: #0b1463;
+}
+.categories__edit-succesiful:hover {
+  background-color: #070d47;
+}
+
 

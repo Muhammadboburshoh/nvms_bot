@@ -26,11 +26,11 @@ const HOST = "http://localhost:3002"
         thirdTd.classList.add("categories__tbody-td")
         let editBtn = document.createElement("BUTTON")
         editBtn.innerHTML = "tahrirlash"
+        editBtn.dataset.update = "0"
         editBtn.classList.add("categories__edit-btn")
         editBtn.dataset.id = res.id
         thirdTd.appendChild(editBtn)
         tr.appendChild(thirdTd)
-
 
         let fourthTd = document.createElement("TD")
         fourthTd.classList.add("categories__tbody-td")
@@ -60,4 +60,42 @@ const HOST = "http://localhost:3002"
         })
     }
 
+    //update class
+    const editBtns = document.querySelectorAll(".categories__edit-btn")
+    const classes = document.querySelectorAll(".categories__tbody-tr")
+    
+    for(let [i, btn] of editBtns.entries()) {
+        btn.addEventListener("click", async () => {
+
+            btn.innerHTML = "tasdiqlash"
+            btn.classList.add("categories__edit-succesiful")
+
+            let newInput = document.createElement("INPUT")
+            newInput.classList.add("category__create-input")
+            newInput.classList.add("class_edit-input")
+            if(btn.dataset.update === "0") {
+                btn.dataset.update = "1"
+
+                newInput.defaultValue = classes[i].childNodes[1].innerHTML
+                classes[i].childNodes[1].innerHTML = ""
+                classes[i].childNodes[1].appendChild(newInput)
+    
+            }
+            else if(btn.dataset.update === "1") {
+                newClassValue = document.querySelector(".class_edit-input").value
+
+                if(newClassValue) {
+                    let editRes = await fetch(`${HOST}/class/` + btn.dataset.id, {
+                        method: "PUT",
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({class_number: newClassValue})
+                    })
+        
+                    if(editRes.status > 200 && editRes.status < 300) {
+                        location.href = HOST
+                    }
+                }
+            }
+        })
+    }
 })()

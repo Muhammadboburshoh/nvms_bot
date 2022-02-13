@@ -18,7 +18,9 @@ const createClassSQL = `
 const createClass = (class_number, school_id) => row(createClassSQL, class_number, school_id)
 
 const selectClassesSQL = `
-    select * from classes;
+    select * from classes
+    order by
+        id;
 `
 const selectClasses = () => rows(selectClassesSQL)
 
@@ -32,12 +34,12 @@ const deleteClass = (class_id) => row(deleteClassSQL, class_id)
 const updeteClassSQL = `
     update classes set
         class = coalesce($2, class),
-        school_id = coalesce($2, class)
+        school_id = coalesce($3, school_id)
     where
-        id = $1
+    id = $1
     returning *
 `
-const updeteClass = (class_number, school_id) => row(class_number, school_id)
+const updeteClass = (class_id, class_number, school_id) => row(updeteClassSQL, class_id, class_number, school_id)
 
 
 module.exports.schoolLogin = schoolLogin
