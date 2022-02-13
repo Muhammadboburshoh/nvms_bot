@@ -93,6 +93,22 @@ router.get("/classes", middleware, async(req, res) => {
     }
 })
 
+router.delete("/class/:id", middleware, async (req, res) => {
+    const class_id = req.params.id
+
+    const deleteClass = await home.deleteClass(class_id)
+    if(deleteClass) {
+        res.status(201).end()
+    }
+})
+
+router.put("/class/:id", middleware, async (req, res) => {
+    const class_id = req.params.id
+    const { school } = req.cookies.__auth
+    const updeteClass = await home.updateClass(class_id, school.id)
+    res.redirect("/")
+})
+
 
 
 module.exports = router

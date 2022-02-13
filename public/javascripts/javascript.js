@@ -27,6 +27,7 @@ const HOST = "http://localhost:3002"
         let editBtn = document.createElement("BUTTON")
         editBtn.innerHTML = "tahrirlash"
         editBtn.classList.add("categories__edit-btn")
+        editBtn.dataset.id = res.id
         thirdTd.appendChild(editBtn)
         tr.appendChild(thirdTd)
 
@@ -36,13 +37,27 @@ const HOST = "http://localhost:3002"
         let deleteBtn = document.createElement("BUTTON")
         deleteBtn.innerHTML = "o'chirish"
         deleteBtn.classList.add("categories__delete-btn")
+        deleteBtn.dataset.id = res.id
         fourthTd.appendChild(deleteBtn)
         tr.appendChild(fourthTd)
 
         fragment.appendChild(tr)
     }
-    console.log(fragment);
     tbody.appendChild(fragment)
 
-    console.log(tbody);
+    //delete class
+    const deleteBtns = document.querySelectorAll(".categories__delete-btn")
+    for(let btn of deleteBtns) {
+        btn.addEventListener("click", async () => {
+
+            let deleteRes = await fetch(`${HOST}/class/` + btn.dataset.id, {
+                method: "DELETE"
+            })
+
+            if(deleteRes.status > 200 && deleteRes.status < 300) {
+                location.href = HOST
+            }
+        })
+    }
+
 })()
