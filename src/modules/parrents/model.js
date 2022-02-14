@@ -34,7 +34,6 @@ const updeteClassSQL = `
 const updeteClass = (class_id, class_number, school_id) => row(updeteClassSQL, class_id, class_number, school_id)
 
 
-module.exports.schoolLogin = schoolLogin
 module.exports.createClass = createClass
 module.exports.selectClasses = selectClasses
 module.exports.deleteClass = deleteClass
