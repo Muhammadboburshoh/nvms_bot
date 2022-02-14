@@ -9,10 +9,12 @@ const createClass = (class_number, school_id) => row(createClassSQL, class_numbe
 //select classes
 const selectClassesSQL = `
     select * from classes
+    where
+        school_id = $1
     order by
         id;
 `
-const selectClasses = () => rows(selectClassesSQL)
+const selectClasses = (school_id) => rows(selectClassesSQL, school_id)
 
 //delete class
 const deleteClassSQL = `

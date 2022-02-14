@@ -92,7 +92,7 @@ router.post("/class", middleware, async(req, res) => {
 router.get("/classes", middleware, async(req, res) => {
     const { school } = req.cookies.__auth
     if(school) {
-        const classes = await home.selectClasses()
+        const classes = await home.selectClasses(school.id)
         res.status(200).send(classes)
     }
     else {
