@@ -5,7 +5,7 @@ const { sign, verify } = require("../../../util/jwt")
 const { site_host } = require("../../../config")
 
 /*
-    Get home page middleware
+    middleware
 */
 const middleware = async (req, res, next) => {
 
@@ -32,6 +32,7 @@ const middleware = async (req, res, next) => {
         return res.status(401).end()
     }
 }
+
 /*
     Get home page
 */
@@ -59,6 +60,9 @@ router.get("/", middleware, async(req, res) => {
     }
 })
 
+/*
+    Create class POST method
+*/
 router.post("/class", middleware, async(req, res) => {
     const { school } = req.cookies.__auth
     
@@ -82,6 +86,9 @@ router.post("/class", middleware, async(req, res) => {
     }
 })
 
+/*
+    select All classes GET method
+*/
 router.get("/classes", middleware, async(req, res) => {
     const { school } = req.cookies.__auth
     if(school) {
@@ -93,6 +100,9 @@ router.get("/classes", middleware, async(req, res) => {
     }
 })
 
+/*
+    Delete class DELETE method
+*/
 router.delete("/class/:id", middleware, async (req, res) => {
     const class_id = req.params.id
     const deleteClass = await home.deleteClass(class_id)
@@ -101,6 +111,9 @@ router.delete("/class/:id", middleware, async (req, res) => {
     }
 })
 
+/*
+    Update class PUT method
+*/
 router.put("/class/:id", middleware, async (req, res) => {
     const class_id = req.params.id
     const { school } = req.cookies.__auth

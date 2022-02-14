@@ -1,18 +1,18 @@
 const router = require("express").Router()
 
 const admin = require("./model")
-const { sign, verify } = require("../../../util/jwt")
+const { sign } = require("../../../util/jwt")
 const { site_host } = require("../../../config")
 
 /*
-    admin login page get
+    admin login GET method
 */
 router.get("/", async(req, res) => {
     res.render("login", {site_host: site_host})
 })
 
 /*
-    Admin Login
+    Admin Login POST method
 */
 router.post("/", async (req, res) => {
     const school = await admin.schoolLogin(req.body)

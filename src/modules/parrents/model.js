@@ -1,22 +1,12 @@
 const { row, rows } = require("../../../util/db")
 
-const schoolLoginSQL = `
-    select
-        id,
-        name,
-        login
-    from schools
-        where
-        login = $1 and password = crypt($2, password)
-`
-const schoolLogin = ({ login, password }) => row(schoolLoginSQL, login, password)
-
-
+// class created
 const createClassSQL = `
     insert into classes(class, school_id) values($1, $2) returning *
 `
 const createClass = (class_number, school_id) => row(createClassSQL, class_number, school_id)
 
+//select classes
 const selectClassesSQL = `
     select * from classes
     order by
@@ -24,6 +14,7 @@ const selectClassesSQL = `
 `
 const selectClasses = () => rows(selectClassesSQL)
 
+//delete class
 const deleteClassSQL = `
     delete from classes
         where id = $1
@@ -31,6 +22,7 @@ const deleteClassSQL = `
 `
 const deleteClass = (class_id) => row(deleteClassSQL, class_id)
 
+//update class
 const updeteClassSQL = `
     update classes set
         class = coalesce($2, class),
