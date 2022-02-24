@@ -71,7 +71,7 @@ router.post("/class", middleware, async(req, res) => {
         try{
             const newClass = await home.createClass(class_number, school.id)
             if(newClass) {
-                res.redirect("/")
+                res.render("successful", {site_host})
             }
             else{
                 res.status(401).end()
@@ -171,7 +171,8 @@ router.post("/parent", middleware, async (req, res) => {
         try{
             const newParent = await home.createParent(phone, password, parent, class_id)
             if(newParent) {
-                res.redirect("/c/parents")
+                // res.send("OK")
+                res.render("successful", {site_host})
             }
             else{
                 res.status(401).end()
