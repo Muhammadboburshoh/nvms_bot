@@ -1,6 +1,3 @@
-const HOST = "http://localhost:3002"
-
-
 ;(async() => {
     let response = await fetch(`${HOST}/classes`)
     const tbody = document.querySelector(".classes")

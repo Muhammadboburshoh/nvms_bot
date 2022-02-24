@@ -22,14 +22,14 @@ const middleware = async (req, res, next) => {
                     next()
                 }
                 else {
-                    return res.status(401).end()
+                    return res.redirect("/login")
                 }
             } catch(e) {
-                res.status(401).end()
+                res.redirect("/login")
             }
         }
     } else {
-        return res.status(401).end()
+        return res.redirect("/login")
     }
 }
 
@@ -65,7 +65,7 @@ router.get("/", middleware, async(req, res) => {
 */
 router.post("/class", middleware, async(req, res) => {
     const { school } = req.cookies.__auth
-    
+
     const class_number = req.body.class_number
     if(school) {
         try{
@@ -125,5 +125,65 @@ router.put("/class/:id", middleware, async (req, res) => {
     }
 })
 
+
+//------------------
+/*
+    create parents POST method
+*/
+router.get("/parrents", middleware, async(req, res) => {
+
+    const { access_token } = req.cookies.__auth
+
+    try {
+        if(access_token) {
+            const school = await verify(access_token)
+            if(school) {
+                res.render("parrents", {site_host: site_host, name: school.name})
+            }
+            else {
+                res.status(401).end()
+            }
+        }
+        else {
+            res.status(401).end()
+        }
+        
+    }
+    catch(err) {
+        res.status(401).end()
+    }
+})
+
+router.post("/parrent", middleware, async (req, res) => {
+    const { school } = req.cookies.__auth
+
+    console.log(req.body.password);
+
+    const phone = req.body.phone
+    const password = req.body.password
+    const parrent = req.body.parrent
+    const class_id = req.body.class_id
+    if(school) {
+        try{
+            const newParrent = await home.createParrent(phone, password, parrent, class_id)
+            if(newParrent) {
+                res.redirect("/parrents")
+            }
+            else{
+                res.status(401).end()
+            }
+
+        }catch(err) {
+            res.status(401).end()
+        }
+    }
+    else {
+        res.status(401).end()
+    }
+})
+
+router.get("/parrents/:id", middleware, async (req, res) => {
+    
+})
 
 module.exports = router

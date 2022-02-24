@@ -509,4 +509,31 @@ body{
   background-color: #070d47;
 }
 
+.parents-select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 10px;
+}
 
+.parrent-hading {
+  text-align: center;
+}
+
+.input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.input-wrapper input {
+  width: 500px;
+}
+
+.section-parrents {
+  margin-right: auto;
+  margin-left: auto;
+  width: 200px;
+  margin-bottom: 20px;
+}
