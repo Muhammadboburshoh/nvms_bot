@@ -67,9 +67,9 @@ const parentsAllSQl = `
     inner join classes c on
         c.id = p.class_id
     where
-        c.school_id = $1
+        c.school_id = $1 and c.id = $2
 `
-const parentsAll = (school_id) => rows(parentsAllSQl, school_id)
+const parentsAll = (school_id, class_id) => rows(parentsAllSQl, school_id, class_id)
 
 module.exports.createClass = createClass
 module.exports.selectClasses = selectClasses

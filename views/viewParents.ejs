@@ -37,13 +37,13 @@
               </a>
             </li>
             <li class="sidebar_item">
-                <a class="sidebar_link" href="/c/parents">
-                  <span class="sidebar_icon">
-                    <img class="first_icon" src="<%=site_host%>/images/plas.png" width="=20" height="20" alt="" />
-                  </span>
-                  Ota ona qo'shish
-                </a>
-              </li>
+              <a class="sidebar_link" href="/c/parents">
+                <span class="sidebar_icon">
+                  <img class="first_icon" src="<%=site_host%>/images/plas.png" width="=20" height="20" alt="" />
+                </span>
+                Ota ona qo'shish
+              </a>
+            </li>
           </ul>
         </nav>
       </section>
@@ -73,39 +73,49 @@
       </header>
 
       <section class="main-content-wrapper">
-            <table class="categories__table">
-                <thead>
-                  <tr class="categories__thead-tr">
-                    <th class="categories__thead-th">Ota ona ismi</th>
-                    <th class="categories__thead-th">Telifon</th>
-                    <th class="categories__thead-th">Password</th>
-                    <th class="categories__thead-th">Tahrirlash</th>
-                    <th class="categories__thead-th">O'chirish</th>
-                  </tr>
-                </thead>
-                <tbody class="classes">
-                  <% for (let i = 0; i < parents.length;  i++ ) { %>
-                    <tr class="categories__thead-tr">
-                      <th class="categories__thead-th">
-                        <%= parents[i].parent %>
-                      </th>
-                      <th class="categories__thead-th">
-                        <%= parents[i].phone %>
-                      </th>
-                      <th class="categories__thead-th">
-                        <%= parents[i].password %>
-                      </th>
-                      <th class="categories__thead-th">
-                        <button data-id="<%= parents[i].id %> " class="categories__edit-btn">tahrirlash</button>
-                      </th>
-                      <th class="categories__thead-th">
-                        <button data-id="<%= parents[i].id %> " class="categories__delete-btn">o'chirish</button>
-                      </th>
-                    </tr>
-                    <% } %>
-                </tbody>
-              </table>
-        </section>
+
+        <ul class="parrents-ul">
+          <% for (let i=0; i < classes.length; i++ ) { %>
+            <li class="parrent-li">
+              <a href="/parents/<%= classes[i].id %>">
+                <%= classes[i].class %> - sinf
+              </a>
+            </li>
+            <% } %>
+        </ul>
+        <table class="categories__table">
+          <thead>
+            <tr class="categories__thead-tr">
+              <th class="categories__thead-th">Ota ona ismi</th>
+              <th class="categories__thead-th">Telifon</th>
+              <th class="categories__thead-th">Password</th>
+              <th class="categories__thead-th">Tahrirlash</th>
+              <th class="categories__thead-th">O'chirish</th>
+            </tr>
+          </thead>
+          <tbody class="classes">
+            <% for (let i=0; i < parents.length; i++ ) { %>
+              <tr class="categories__thead-tr">
+                <th class="categories__thead-th">
+                  <%= parents[i].parent %>
+                </th>
+                <th class="categories__thead-th">
+                  <%= parents[i].phone %>
+                </th>
+                <th class="categories__thead-th">
+                  <%= parents[i].password %>
+                </th>
+                <th class="categories__thead-th">
+                  <button data-id="<%= parents[i].id %> " class="categories__edit-btn">tahrirlash</button>
+                </th>
+                <th class="categories__thead-th">
+                  <button data-id="<%= parents[i].id %> " class="categories__delete-btn">o'chirish</button>
+                </th>
+              </tr>
+              <% } %>
+          </tbody>
+        </table>
+      </section>
     </div>
   </div>
 

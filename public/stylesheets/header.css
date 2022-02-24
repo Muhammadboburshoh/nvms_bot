@@ -546,3 +546,30 @@ body{
   margin-right: auto;
   margin-left: auto;
 }
+
+.parrents-ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+}
+
+.parrent-li {
+  margin: 20px;
+  border: 1px solid #070d47;
+  border-radius: 4px;
+  background-color: rgb(240, 240, 240);
+}
+
+.parrent-li:hover {
+  background-color: rgb(216, 212, 212);
+}
+
+.parrent-li a {
+  display: inline-block;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #000000;
+}

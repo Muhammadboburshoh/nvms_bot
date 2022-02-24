@@ -188,19 +188,17 @@ router.get("/parents/:id", middleware, async (req, res) => {
     let class_id = req.params.id
     const { school } = req.cookies.__auth
 
-    if(class_id === 0) {
-        class_id = await home.firstClass(school.id)
-    }
+    const parents = await home.parentsAll(school.id, class_id);
+    const classes = await home.selectClasses(school.id)
 
-    const parents = await home.parentsAll(school.id);
-    console.log(parents);
     try {
         if(school) {
             res.render("viewParents",
             {
                 site_host: site_host,
                 parents: parents,
-                name:school.name
+                name:school.name,
+                classes: classes
             })
         }
     } catch(e) {
