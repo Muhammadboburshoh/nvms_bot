@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="<%=site_host%>/stylesheets/header.css">
-  <title>Home page</title>
+  <title>view parrents page</title>
 </head>
 
 <body>
@@ -37,13 +37,13 @@
               </a>
             </li>
             <li class="sidebar_item">
-              <a class="sidebar_link" href="/c/parents">
-                <span class="sidebar_icon">
-                  <img class="first_icon" src="<%=site_host%>/images/plas.png" width="=20" height="20" alt="" />
-                </span>
-                Ota ona qo'shish
-              </a>
-            </li>
+                <a class="sidebar_link" href="/c/parents">
+                  <span class="sidebar_icon">
+                    <img class="first_icon" src="<%=site_host%>/images/plas.png" width="=20" height="20" alt="" />
+                  </span>
+                  Ota ona qo'shish
+                </a>
+              </li>
           </ul>
         </nav>
       </section>
@@ -73,30 +73,25 @@
       </header>
 
       <section class="main-content-wrapper">
-        <form class="category__create-form" action="/class" method="POST" enctype="application/x-www-form-urlencoded">
-          <label for="create-category">Sinf qo'shing: </label>
-          <input name="class_number" class="category__create-input" type="text" placeholder="Sinf nomi..." required />
-          <button class="category__create-btn" type="submit">Yaratish</button>
-        </form>
-
-        <table class="categories__table">
-          <thead>
-            <tr class="categories__thead-tr">
-              <th class="categories__thead-th">ID</th>
-              <th class="categories__thead-th">Sinf nomi</th>
-              <th class="categories__thead-th">Tahrirlash</th>
-              <th class="categories__thead-th">O'chirish</th>
-            </tr>
-          </thead>
-          <tbody class="classes"></tbody>
-        </table>
-      </section>
+            <table class="categories__table">
+                <thead>
+                  <tr class="categories__thead-tr">
+                    <th class="categories__thead-th">Ota ona ismi</th>
+                    <th class="categories__thead-th">Telifon</th>
+                    <th class="categories__thead-th">Password</th>
+                    <th class="categories__thead-th">Tahrirlash</th>
+                    <th class="categories__thead-th">O'chirish</th>
+                  </tr>
+                </thead>
+                <tbody class="classes"></tbody>
+              </table>
+        </section>
     </div>
   </div>
 
 
   <script src="<%=site_host%>/javascripts/config.js"></script>
-  <script src="<%=site_host%>/javascripts/javascript.js"></script>
+  <script src="<%=site_host%>/javascripts/viewParents.js"></script>
 </body>
 
 </html>

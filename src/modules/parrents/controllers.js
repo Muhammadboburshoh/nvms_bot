@@ -159,19 +159,16 @@ router.get("/c/parents", middleware, async(req, res) => {
 */
 
 router.post("/parent", middleware, async (req, res) => {
-    const { school } = req.cookies.__auth
-
     const phone = req.body.phone
     const password = req.body.password
     const parent = req.body.parent
     const class_id = req.body.class_id
 
-    console.log(phone, password, parent, class_id);
+    const { school } = req.cookies.__auth
     if(school) {
         try{
             const newParent = await home.createParent(phone, password, parent, class_id)
             if(newParent) {
-                // res.send("OK")
                 res.render("successful", {site_host})
             }
             else{
@@ -188,7 +185,27 @@ router.post("/parent", middleware, async (req, res) => {
 })
 
 router.get("/parents/:id", middleware, async (req, res) => {
-    
+    let class_id = req.params.id
+    const { school } = req.cookies.__auth
+
+    if(class_id === 0) {
+        class_id = await home.firstClass(school.id)
+    }
+
+    const parents = await home.parentsAll(school.id);
+    console.log(parents);
+    try {
+        if(school) {
+            res.render("viewParents",
+            {
+                site_host: site_host,
+                name:school.name,
+                parents: parents
+            })
+        }
+    } catch(e) {
+        req.status(401).end()
+    }
 })
 
 module.exports = router

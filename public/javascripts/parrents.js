@@ -17,6 +17,4 @@
         section[1].appendChild(option1)
     }
 
-    // let res = await fetch
-
 })()

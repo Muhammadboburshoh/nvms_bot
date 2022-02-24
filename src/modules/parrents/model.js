@@ -43,9 +43,38 @@ const createParentSQL = `
 `
 const createParent = (phone, password, parent, class_id) => row(createParentSQL, phone, password, parent, class_id)
 
+const firstClassSQL = `
+    select * from
+        classes
+    where
+        school_id = $1
+    order by
+        id
+    limit 1
+`
+const firstClass = (school_id) => row(firstClassSQL, school_id)
+
+const parentsAllSQl = `
+    select
+        p.id,
+        p.phone,
+        p.password,
+        p.parent,
+        c.school_id,
+        c.class
+    from
+        parents as p
+    inner join classes c on
+        c.id = p.class_id
+    where
+        c.school_id = $1
+`
+const parentsAll = (school_id) => rows(parentsAllSQl, school_id)
 
 module.exports.createClass = createClass
 module.exports.selectClasses = selectClasses
 module.exports.deleteClass = deleteClass
 module.exports.updeteClass = updeteClass
 module.exports.createParent = createParent
+module.exports.firstClass = firstClass
+module.exports.parentsAll = parentsAll
