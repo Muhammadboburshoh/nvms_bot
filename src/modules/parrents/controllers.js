@@ -128,9 +128,9 @@ router.put("/class/:id", middleware, async (req, res) => {
 
 //------------------
 /*
-    create parents POST method
+    create parents GET method
 */
-router.get("/parrents", middleware, async(req, res) => {
+router.get("/c/parents", middleware, async(req, res) => {
 
     const { access_token } = req.cookies.__auth
 
@@ -138,7 +138,7 @@ router.get("/parrents", middleware, async(req, res) => {
         if(access_token) {
             const school = await verify(access_token)
             if(school) {
-                res.render("parrents", {site_host: site_host, name: school.name})
+                res.render("parents", {site_host: site_host, name: school.name})
             }
             else {
                 res.status(401).end()
@@ -154,20 +154,24 @@ router.get("/parrents", middleware, async(req, res) => {
     }
 })
 
-router.post("/parrent", middleware, async (req, res) => {
-    const { school } = req.cookies.__auth
+/*
+    create parents GET method
+*/
 
-    console.log(req.body.password);
+router.post("/parent", middleware, async (req, res) => {
+    const { school } = req.cookies.__auth
 
     const phone = req.body.phone
     const password = req.body.password
-    const parrent = req.body.parrent
+    const parent = req.body.parent
     const class_id = req.body.class_id
+
+    console.log(phone, password, parent, class_id);
     if(school) {
         try{
-            const newParrent = await home.createParrent(phone, password, parrent, class_id)
-            if(newParrent) {
-                res.redirect("/parrents")
+            const newParent = await home.createParent(phone, password, parent, class_id)
+            if(newParent) {
+                res.redirect("/c/parents")
             }
             else{
                 res.status(401).end()
@@ -182,7 +186,7 @@ router.post("/parrent", middleware, async (req, res) => {
     }
 })
 
-router.get("/parrents/:id", middleware, async (req, res) => {
+router.get("/parents/:id", middleware, async (req, res) => {
     
 })
 

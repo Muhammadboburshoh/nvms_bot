@@ -37,15 +37,15 @@ const updeteClass = (class_id, class_number, school_id) => row(updeteClassSQL, c
 
 
 //------------------------
-// create parrent
-const createParrentSQL = `
-    insert into parrents(phone, password, parrent, class_id) values ($1, $2, $3, $4) returning *
+// create parent
+const createParentSQL = `
+    insert into parents(phone, password, parent, class_id) values ($1, $2, $3, $4) returning *
 `
-const createParrent = (phone, password, parrent, class_id) => row(createParrentSQL, phone, password, parrent, class_id)
+const createParent = (phone, password, parent, class_id) => row(createParentSQL, phone, password, parent, class_id)
 
 
 module.exports.createClass = createClass
 module.exports.selectClasses = selectClasses
 module.exports.deleteClass = deleteClass
 module.exports.updeteClass = updeteClass
-module.exports.createParrent = createParrent
+module.exports.createParent = createParent
