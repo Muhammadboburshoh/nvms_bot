@@ -537,3 +537,12 @@ body{
   width: 200px;
   margin-bottom: 20px;
 }
+
+
+.parent-btn {
+  width: 150px;
+  letter-spacing: 1.5px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
