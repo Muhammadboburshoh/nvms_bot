@@ -199,8 +199,8 @@ router.get("/parents/:id", middleware, async (req, res) => {
             res.render("viewParents",
             {
                 site_host: site_host,
-                name:school.name,
-                parents: parents
+                parents: parents,
+                name:school.name
             })
         }
     } catch(e) {
