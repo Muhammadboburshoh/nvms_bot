@@ -69,19 +69,23 @@ router.post("/class", middleware, async(req, res) => {
     const class_number = req.body.class_number
     if(school) {
         try{
-            const newClass = await home.createClass(class_number, school.id)
+            const newClass = await home.createClass(class_number, school.school_id)
+            console.log(newClass, 0);
             if(newClass) {
                 res.render("successful", {site_host})
             }
             else{
+                console.log(1);
                 res.status(401).end()
             }
 
         }catch(err) {
+            console.log(2);
             res.status(401).end()
         }
     }
     else {
+        console.log(3);
         res.status(401).end()
     }
 })
@@ -92,7 +96,7 @@ router.post("/class", middleware, async(req, res) => {
 router.get("/classes", middleware, async(req, res) => {
     const { school } = req.cookies.__auth
     if(school) {
-        const classes = await home.selectClasses(school.id)
+        const classes = await home.selectClasses(school.school_id)
         res.status(200).send(classes)
     }
     else {
@@ -109,6 +113,9 @@ router.delete("/class/:id", middleware, async (req, res) => {
     if(deleteClass) {
         res.status(201).end()
     }
+    else {
+        res.status(403).end()
+    }
 })
 
 /*
@@ -119,9 +126,12 @@ router.put("/class/:id", middleware, async (req, res) => {
     const { school } = req.cookies.__auth
     const { class_number } = req.body
 
-    const updeteClass = await home.updeteClass(class_id, class_number, school.id)
+    const updeteClass = await home.updeteClass(class_id, class_number, school.school_id)
     if(updeteClass) {
         res.status(201).end()
+    }
+    else {
+        res.status(403).end()
     }
 })
 
@@ -184,12 +194,15 @@ router.post("/parent", middleware, async (req, res) => {
     }
 })
 
+/*
+    view parent page
+*/
 router.get("/parents/:id", middleware, async (req, res) => {
     let class_id = req.params.id
     const { school } = req.cookies.__auth
 
-    const parents = await home.parentsAll(school.id, class_id);
-    const classes = await home.selectClasses(school.id)
+    const parents = await home.parentsAll(school.school_id, class_id);
+    const classes = await home.selectClasses(school.school_id)
 
     try {
         if(school) {
@@ -203,6 +216,20 @@ router.get("/parents/:id", middleware, async (req, res) => {
         }
     } catch(e) {
         req.status(401).end()
+    }
+})
+
+/*
+    delete parent method
+*/
+router.delete("/parent/:id", middleware, async (req, res) => {
+    const parent_id = req.params.id
+    const deleteParent = await home.deleteParent(parent_id)
+    if(deleteParent) {
+        res.status(201).end()
+    }
+    else {
+        res.status(403).end()
     }
 })
 

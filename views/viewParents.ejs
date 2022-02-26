@@ -77,7 +77,7 @@
         <ul class="parrents-ul">
           <% for (let i=0; i < classes.length; i++ ) { %>
             <li class="parrent-li">
-              <a href="/parents/<%= classes[i].id %>">
+              <a href="/parents/<%= classes[i].class_id %>">
                 <%= classes[i].class %> - sinf
               </a>
             </li>
@@ -106,10 +106,10 @@
                   <%= parents[i].password %>
                 </th>
                 <th class="categories__thead-th">
-                  <button data-id="<%= parents[i].id %> " class="categories__edit-btn">tahrirlash</button>
+                  <button data-id="<%= parents[i].parent_id %> " class="categories__edit-btn">tahrirlash</button>
                 </th>
                 <th class="categories__thead-th">
-                  <button data-id="<%= parents[i].id %> " class="categories__delete-btn">o'chirish</button>
+                  <button data-id="<%= parents[i].parent_id %> " class="categories__delete-btn">o'chirish</button>
                 </th>
               </tr>
               <% } %>

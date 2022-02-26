@@ -3,7 +3,7 @@ const { row } = require("../../../util/db")
 //school login
 const schoolLoginSQL = `
     select
-        id,
+        school_id,
         name,
         login
     from schools

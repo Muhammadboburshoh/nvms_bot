@@ -5,6 +5,7 @@ body{
 
 .main-wrapper {
   display: flex;
+  height: 100%;
 }
 
 .sidebar-wrapper {
@@ -16,7 +17,6 @@ body{
 }
 
 .content-wrapper {
-  height: 100vh;
   flex-grow: 1;
   flex-direction: column;
   background-color: #f7f8fa;
@@ -231,13 +231,6 @@ body{
   height: 100vh;
   padding: 20px;
   background-color: #fff;
-}
-
-.content-wrapper {
-  height: 100vh;
-  flex-grow: 1;
-  flex-direction: column;
-  background-color: #f7f8fa;
 }
 
 .order-wrapper {
@@ -548,15 +541,15 @@ body{
 }
 
 .parrents-ul {
-  margin: 0;
+  gap: 21px;
   padding: 0;
   list-style-type: none;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
 .parrent-li {
-  margin: 20px;
   border: 1px solid #070d47;
   border-radius: 4px;
   background-color: rgb(240, 240, 240);
@@ -567,7 +560,8 @@ body{
 }
 
 .parrent-li a {
-  display: inline-block;
+  display: block;
+  width: 70px;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;

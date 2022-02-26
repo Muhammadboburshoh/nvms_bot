@@ -9,11 +9,6 @@
         let tr = document.createElement("TR")
         tr.classList.add("categories__tbody-tr")
 
-        let firstTd = document.createElement("TD")
-        firstTd.innerHTML = res.id
-        firstTd.classList.add("categories__tbody-td")
-        tr.appendChild(firstTd)
-
         let secontTd = document.createElement("TD")
         secontTd.innerHTML = res.class
         secontTd.classList.add("categories__tbody-td")
@@ -25,7 +20,7 @@
         editBtn.innerHTML = "tahrirlash"
         editBtn.dataset.update = "0"
         editBtn.classList.add("categories__edit-btn")
-        editBtn.dataset.id = res.id
+        editBtn.dataset.id = res.class_id
         thirdTd.appendChild(editBtn)
         tr.appendChild(thirdTd)
 
@@ -34,7 +29,7 @@
         let deleteBtn = document.createElement("BUTTON")
         deleteBtn.innerHTML = "o'chirish"
         deleteBtn.classList.add("categories__delete-btn")
-        deleteBtn.dataset.id = res.id
+        deleteBtn.dataset.id = res.class_id
         fourthTd.appendChild(deleteBtn)
         tr.appendChild(fourthTd)
 
@@ -73,9 +68,9 @@
             if(btn.dataset.update === "0") {
                 btn.dataset.update = "1"
 
-                newInput.defaultValue = classes[i].childNodes[1].innerHTML
-                classes[i].childNodes[1].innerHTML = ""
-                classes[i].childNodes[1].appendChild(newInput)
+                newInput.defaultValue = classes[i].childNodes[0].innerHTML
+                classes[i].childNodes[0].innerHTML = ""
+                classes[i].childNodes[0].appendChild(newInput)
     
             }
             else if(btn.dataset.update === "1") {

@@ -10,8 +10,8 @@
         option.textContent = i.class + " - sinf"
         option1.textContent = i.class + " - sinf"
 
-        option.value = i.id
-        option1.value = i.id
+        option.value = i.class_id
+        option1.value = i.class_id
 
         section[0].appendChild(option)
         section[1].appendChild(option1)
