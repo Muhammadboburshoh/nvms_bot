@@ -2,19 +2,13 @@
     let response = await fetch(`${HOST}/classes`)
     response = await response.json()
 
-    const section = document.querySelectorAll(".parents-select")
+    const section = document.querySelector(".parents-select")
     for (let i of response) {
-        let option1 = document.createElement("OPTION")
         let option = document.createElement("OPTION")
 
         option.textContent = i.class + " - sinf"
-        option1.textContent = i.class + " - sinf"
-
         option.value = i.class_id
-        option1.value = i.class_id
 
-        section[0].appendChild(option)
-        section[1].appendChild(option1)
+        section.appendChild(option)
     }
-
 })()
