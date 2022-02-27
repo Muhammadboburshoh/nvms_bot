@@ -96,19 +96,19 @@
           <tbody class="classes">
             <% for (let i=0; i < parents.length; i++ ) { %>
               <tr class="categories__tbody-tr">
-                <th class="categories__thead-th">
+                <th class="categories__tbody-td">
                   <%= parents[i].parent %>
                 </th>
-                <th class="categories__thead-th">
+                <th class="categories__tbody-td">
                   <%= parents[i].phone %>
                 </th>
-                <th class="categories__thead-th">
+                <th class="categories__tbody-td">
                   <%= parents[i].password %>
                 </th>
-                <th class="categories__thead-th">
+                <th class="categories__tbody-td">
                   <button data-id="<%= parents[i].parent_id %>" class="categories__edit-btn" data-update="0">tahrirlash</button>
                 </th>
-                <th class="categories__thead-th">
+                <th class="categories__tbody-td">
                   <button data-id="<%= parents[i].parent_id %> " class="categories__delete-btn">o'chirish</button>
                 </th>
               </tr>
