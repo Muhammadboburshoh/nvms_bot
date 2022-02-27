@@ -347,7 +347,7 @@ body{
   border: 1px solid #ddd;
   border-radius: 4px;
   margin-right: 10px;
-  /* width: 150px; */
+  background-color: #fff;
   text-align: center;
 }
 
