@@ -507,6 +507,8 @@ body{
   border: 1px solid #ddd;
   border-radius: 4px;
   margin-right: 10px;
+  width: 150px;
+  text-align: center;
 }
 
 .parrent-hading {
@@ -556,6 +558,10 @@ body{
 }
 
 .parrent-li:hover {
+  background-color: rgb(216, 212, 212);
+}
+
+.parent_active {
   background-color: rgb(216, 212, 212);
 }
 

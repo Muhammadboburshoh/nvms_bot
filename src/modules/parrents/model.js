@@ -46,17 +46,6 @@ const createParentSQL = `
 `
 const createParent = (phone, password, parent, class_id) => row(createParentSQL, phone, password, parent, class_id)
 
-const firstClassSQL = `
-    select * from
-        classes
-    where
-        school_id = $1
-    order by
-        parent_id
-    limit 1
-`
-const firstClass = (school_id) => row(firstClassSQL, school_id)
-
 const parentsAllSQl = `
     select
         p.parent_id,
@@ -77,7 +66,7 @@ const parentsAll = (school_id, class_id) => rows(parentsAllSQl, school_id, class
 //parent delete 
 const deleteParentSQL = `
     delete from parents
-        where id = $1
+        where parent_id = $1
     returning *
 `
 const deleteParent = (parent_id) => row(deleteParentSQL, parent_id)
@@ -88,6 +77,5 @@ module.exports.deleteClass = deleteClass
 module.exports.updeteClass = updeteClass
 
 module.exports.createParent = createParent
-module.exports.firstClass = firstClass
 module.exports.parentsAll = parentsAll
 module.exports.deleteParent = deleteParent

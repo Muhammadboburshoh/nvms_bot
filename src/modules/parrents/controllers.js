@@ -126,11 +126,15 @@ router.put("/class/:id", middleware, async (req, res) => {
     const { school } = req.cookies.__auth
     const { class_number } = req.body
 
-    const updeteClass = await home.updeteClass(class_id, class_number, school.school_id)
-    if(updeteClass) {
-        res.status(201).end()
-    }
-    else {
+    try {
+        const updeteClass = await home.updeteClass(class_id, class_number, school.school_id)
+        if(updeteClass) {
+            res.status(201).end()
+        }
+        else {
+            res.status(403).end()
+        }
+    } catch(e) {
         res.status(403).end()
     }
 })
