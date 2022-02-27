@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
   <div class="main-wrapper">
     <div class="sidebar-wrapper">
       <section class="sidebar">
@@ -73,7 +72,6 @@
       </header>
 
       <section class="main-content-wrapper">
-
         <ul class="parrents-ul">
           <% for (let i=0; i < classes.length; i++ ) { %>
             <li class="parrent-li">
@@ -89,6 +87,7 @@
               <th class="categories__thead-th">Ota ona ismi</th>
               <th class="categories__thead-th">Telifon</th>
               <th class="categories__thead-th">Password</th>
+              <th class="categories__thead-th">Farzand sinfi</th>
               <th class="categories__thead-th">Tahrirlash</th>
               <th class="categories__thead-th">O'chirish</th>
             </tr>
@@ -106,6 +105,9 @@
                   <%= parents[i].password %>
                 </th>
                 <th class="categories__tbody-td">
+                  <%= parents[i].class %>
+                </th>
+                <th class="categories__tbody-td">
                   <button data-id="<%= parents[i].parent_id %>" class="categories__edit-btn" data-update="0">tahrirlash</button>
                 </th>
                 <th class="categories__tbody-td">
@@ -118,7 +120,6 @@
       </section>
     </div>
   </div>
-
 
   <script src="<%=site_host%>/javascripts/config.js"></script>
   <script src="<%=site_host%>/javascripts/viewParents.js"></script>

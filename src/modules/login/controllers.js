@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
 
     if(school) {
         const accessToken = sign(school)
-        res.cookie('__auth', {access_token: accessToken, school}, {maxAge: 900000, httpOnly: true})
+        res.cookie('__auth', {access_token: accessToken, school}, {maxAge: 1000 * 60 * 60 * 24 * 7, httpOnly: true})
         res.redirect('/')
     }
     else {
