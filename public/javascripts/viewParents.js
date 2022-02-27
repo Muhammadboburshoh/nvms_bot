@@ -42,6 +42,8 @@ for(let [i, btn] of editBtns.entries()) {
         parentPhone.classList.add("category__create-input", "class_edit-input")
         parentPassword.classList.add("category__create-input", "class_edit-input")
 
+        parentPhone.type="number"
+
         if(btn.dataset.update === "0") {
             btn.dataset.update = "1"
 
@@ -58,8 +60,25 @@ for(let [i, btn] of editBtns.entries()) {
             parents[i].childNodes[5].appendChild(parentPassword)
         }
         else if (btn.dataset.update === "1") {
-            parentInputValues = document.querySelectorAll(".category__create-input")
+            parentValues = document.querySelectorAll(".category__create-input")
 
+            if(parentValues[0].value && parentValues[1].value && parentValues[2].value) {
+
+                let editRes = await fetch(`${HOST}/parrent/` + btn.dataset.id, {
+                    method: "PUT",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        parent: parentValues[0].value,
+                        phone: parentValues[1].value,
+                        password: parentValues[2].value
+                    })
+                })
+    
+                if(editRes.status > 200 && editRes.status < 300) {
+                    location.href = `${HOST}/parents/${class_id}`
+                }
+
+            }
         }
     })
 }

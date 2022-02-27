@@ -171,7 +171,6 @@ router.get("/c/parents", middleware, async(req, res) => {
 /*
     create parents GET method
 */
-
 router.post("/parent", middleware, async (req, res) => {
     const phone = req.body.phone
     const password = req.body.password
@@ -236,5 +235,26 @@ router.delete("/parent/:id", middleware, async (req, res) => {
         res.status(403).end()
     }
 })
+
+/*
+    update parent method
+*/
+router.put("/parrent/:id", middleware, async (req, res) => {
+    const parent_id = req.params.id
+    const { parent, phone, password } = req.body
+
+    try {
+        const updateParent = await home.updateParent(parent_id, parent, phone, password)
+        if(updateParent) {
+            res.status(201).end()
+        }
+        else {
+            res.status(403).end()
+        }
+    } catch(e) {
+        res.status(403).end()
+    }
+})
+
 
 module.exports = router

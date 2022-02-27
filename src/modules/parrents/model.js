@@ -33,7 +33,7 @@ const updeteClassSQL = `
         class = coalesce($2, class),
         school_id = coalesce($3, school_id)
     where
-    class_id = $1
+        class_id = $1
     returning *
 `
 const updeteClass = (class_id, class_number, school_id) => row(updeteClassSQL, class_id, class_number, school_id)
@@ -60,6 +60,8 @@ const parentsAllSQl = `
         c.class_id = p.class_id
     where
         c.school_id = $1 and c.class_id = $2
+    order by
+        p.parent_id
 `
 const parentsAll = (school_id, class_id) => rows(parentsAllSQl, school_id, class_id)
 
@@ -71,6 +73,18 @@ const deleteParentSQL = `
 `
 const deleteParent = (parent_id) => row(deleteParentSQL, parent_id)
 
+//parent update
+const updateParentSQL = `
+    update parents set
+        parent = coalesce($2, parent),
+        phone = coalesce($3, phone),
+        password = coalesce($4, password)
+    where
+        parent_id = $1
+    returning *
+`
+const updateParent = (parent_id, parent, phone, password) => row(updateParentSQL, parent_id, parent, phone, password)
+
 module.exports.createClass = createClass
 module.exports.selectClasses = selectClasses
 module.exports.deleteClass = deleteClass
@@ -79,3 +93,4 @@ module.exports.updeteClass = updeteClass
 module.exports.createParent = createParent
 module.exports.parentsAll = parentsAll
 module.exports.deleteParent = deleteParent
+module.exports.updateParent = updateParent
