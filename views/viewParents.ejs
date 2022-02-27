@@ -95,7 +95,7 @@
           </thead>
           <tbody class="classes">
             <% for (let i=0; i < parents.length; i++ ) { %>
-              <tr class="categories__thead-tr">
+              <tr class="categories__tbody-tr">
                 <th class="categories__thead-th">
                   <%= parents[i].parent %>
                 </th>
@@ -106,7 +106,7 @@
                   <%= parents[i].password %>
                 </th>
                 <th class="categories__thead-th">
-                  <button data-id="<%= parents[i].parent_id %> " class="categories__edit-btn">tahrirlash</button>
+                  <button data-id="<%= parents[i].parent_id %>" class="categories__edit-btn" data-update="0">tahrirlash</button>
                 </th>
                 <th class="categories__thead-th">
                   <button data-id="<%= parents[i].parent_id %> " class="categories__delete-btn">o'chirish</button>

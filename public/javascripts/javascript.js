@@ -55,10 +55,9 @@
     //update class
     const editBtns = document.querySelectorAll(".categories__edit-btn")
     const classes = document.querySelectorAll(".categories__tbody-tr")
-    
+
     for(let [i, btn] of editBtns.entries()) {
         btn.addEventListener("click", async () => {
-
             btn.innerHTML = "tasdiqlash"
             btn.classList.add("categories__edit-succesiful")
 
@@ -71,7 +70,6 @@
                 newInput.defaultValue = classes[i].childNodes[0].innerHTML
                 classes[i].childNodes[0].innerHTML = ""
                 classes[i].childNodes[0].appendChild(newInput)
-    
             }
             else if(btn.dataset.update === "1") {
                 newClassValue = document.querySelector(".class_edit-input").value
