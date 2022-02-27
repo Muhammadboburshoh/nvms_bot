@@ -53,7 +53,6 @@ router.get("/", middleware, async(req, res) => {
         else {
             res.status(401).end()
         }
-        
     }
     catch(err) {
         res.status(401).end()
@@ -70,22 +69,17 @@ router.post("/class", middleware, async(req, res) => {
     if(school) {
         try{
             const newClass = await home.createClass(class_number, school.school_id)
-            console.log(newClass, 0);
             if(newClass) {
                 res.render("successful", {site_host})
             }
             else{
-                console.log(1);
                 res.status(401).end()
             }
-
         }catch(err) {
-            console.log(2);
             res.status(401).end()
         }
     }
     else {
-        console.log(3);
         res.status(401).end()
     }
 })
@@ -161,7 +155,6 @@ router.get("/c/parents", middleware, async(req, res) => {
         else {
             res.status(401).end()
         }
-        
     }
     catch(err) {
         res.status(401).end()
@@ -187,7 +180,6 @@ router.post("/parent", middleware, async (req, res) => {
             else{
                 res.status(401).end()
             }
-
         }catch(err) {
             res.status(401).end()
         }
@@ -241,10 +233,11 @@ router.delete("/parent/:id", middleware, async (req, res) => {
 */
 router.put("/parrent/:id", middleware, async (req, res) => {
     const parent_id = req.params.id
-    const { parent, phone, password } = req.body
+    const { parent, phone, password, class_id } = req.body
 
+    console.log(class_id);
     try {
-        const updateParent = await home.updateParent(parent_id, parent, phone, password)
+        const updateParent = await home.updateParent(parent_id, parent, phone, password, class_id)
         if(updateParent) {
             res.status(201).end()
         }

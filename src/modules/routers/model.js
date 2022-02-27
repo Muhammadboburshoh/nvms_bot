@@ -78,12 +78,13 @@ const updateParentSQL = `
     update parents set
         parent = coalesce($2, parent),
         phone = coalesce($3, phone),
-        password = coalesce($4, password)
+        password = coalesce($4, password),
+        class_id = coalesce($5, class_id)
     where
         parent_id = $1
     returning *
 `
-const updateParent = (parent_id, parent, phone, password) => row(updateParentSQL, parent_id, parent, phone, password)
+const updateParent = (parent_id, parent, phone, password, class_id) => row(updateParentSQL, parent_id, parent, phone, password, class_id)
 
 module.exports.createClass = createClass
 module.exports.selectClasses = selectClasses
