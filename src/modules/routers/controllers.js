@@ -1,7 +1,7 @@
 const router = require("express").Router()
 
 const home = require("./model")
-const { sign, verify } = require("../../../util/jwt")
+const { verify } = require("../../../util/jwt")
 const { site_host } = require("../../../config")
 
 /*
