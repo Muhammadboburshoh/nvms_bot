@@ -86,6 +86,42 @@ const updateParentSQL = `
 `
 const updateParent = (parent_id, parent, phone, password, class_id) => row(updateParentSQL, parent_id, parent, phone, password, class_id)
 
+
+//main admin create
+const createSchoolSQL = `
+    insert into schools(name, login, password) values($1, $2, crypt($3, gen_salt('bf'))) returning *
+`
+const createSchool = ({ school_name, login, password }) => row(createSchoolSQL, school_name, login, password)
+
+const allSchoolsSQL = `
+    select
+        school_id,
+        name,
+        login
+    from
+        schools
+`
+const allSchools = () => rows(allSchoolsSQL)
+
+const deleteSchoolSQL = `
+    delete from schools
+        where school_id = $1
+    returning *
+`
+const deleteSchool = (school_id) => row(deleteSchoolSQL, school_id)
+
+const updateSchoolSQL = `
+    update schools set
+        name = coalesce($2, name),
+        login = coalesce($3, login),
+        password = crypt($4, gen_salt('bf'))
+    where 
+        school_id = $1
+    returning *
+`
+const updateSchool = (school_id, name, login, password) => row(updateSchoolSQL, school_id, name, login, password)
+
+
 module.exports.createClass = createClass
 module.exports.selectClasses = selectClasses
 module.exports.deleteClass = deleteClass
@@ -95,3 +131,8 @@ module.exports.createParent = createParent
 module.exports.parentsAll = parentsAll
 module.exports.deleteParent = deleteParent
 module.exports.updateParent = updateParent
+
+module.exports.createSchool = createSchool
+module.exports.allSchools = allSchools
+module.exports.deleteSchool = deleteSchool
+module.exports.updateSchool = updateSchool

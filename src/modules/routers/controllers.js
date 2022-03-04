@@ -13,7 +13,7 @@ const middleware = async (req, res, next) => {
         const { access_token } = req.cookies.__auth
     
         if(!access_token) {
-            return res.sendStatus(401)
+            return res.redirect("/login")
         }
         else {
             try {
@@ -30,6 +30,32 @@ const middleware = async (req, res, next) => {
         }
     } else {
         return res.redirect("/login")
+    }
+}
+
+const adminMiddleware = async (req, res, next) => {
+
+    if(req.cookies.__auth) {
+        const { accessToken } = req.cookies.__auth
+    
+        if(!accessToken) {
+            return res.redirect("/login/admin")
+        }
+        else {
+            try {
+                const school = await verify(accessToken)
+                if(school) {
+                    next()
+                }
+                else {
+                    return res.redirect("/login/admin")
+                }
+            } catch(e) {
+                res.redirect("/login/admin")
+            }
+        }
+    } else {
+        return res.redirect("/login/admin")
     }
 }
 
@@ -70,7 +96,7 @@ router.post("/class", middleware, async(req, res) => {
         try{
             const newClass = await home.createClass(class_number, school.school_id)
             if(newClass) {
-                res.render("successful", {site_host})
+                res.render("successful", {site_host, url: "/"})
             }
             else{
                 res.status(401).end()
@@ -175,7 +201,7 @@ router.post("/parent", middleware, async (req, res) => {
         try{
             const newParent = await home.createParent(phone, password, parent, class_id)
             if(newParent) {
-                res.render("successful", {site_host})
+                res.render("successful", {site_host, url: "/"})
             }
             else{
                 res.status(401).end()
@@ -235,7 +261,6 @@ router.put("/parrent/:id", middleware, async (req, res) => {
     const parent_id = req.params.id
     const { parent, phone, password, class_id } = req.body
 
-    console.log(class_id);
     try {
         const updateParent = await home.updateParent(parent_id, parent, phone, password, class_id)
         if(updateParent) {
@@ -249,5 +274,107 @@ router.put("/parrent/:id", middleware, async (req, res) => {
     }
 })
 
+
+/*
+    admin home
+*/
+router.get("/admin/home", adminMiddleware, async (req, res) => {
+
+    const { accessToken } = req.cookies.__auth
+
+    try {
+        const schools = await home.allSchools()
+        if(accessToken) {
+            const mainAdmin = await verify(accessToken)
+            if(mainAdmin) {
+                res.render("adminHome", {site_host: site_host, name: mainAdmin.login, schools})
+            }
+            else {
+                res.status(401).end()
+            }
+        }
+        else {
+            res.status(401).end()
+        }
+    }
+    catch(err) {
+        res.status(401).end()
+    }
+})
+
+/*
+    create school
+*/
+router.post("/admin/home", adminMiddleware, async(req, res) => {
+    try {
+        const newSchool = await home.createSchool(req.body)
+        if(newSchool){
+            res.render("successful", {site_host, url: "/admin/home"})
+        }
+        else {
+            res.status(401).end()
+        }
+    } catch(err) {
+        res.status(401).end()
+    }
+})
+
+/*
+    all schools list
+*/
+router.get("/admin/schools", adminMiddleware, async(req, res) => {
+    try {
+        const schools = await home.allSchools()
+        if(schools) {
+            res.status(201).send(schools)
+        }
+        else {
+            res.status(403).end()
+        }
+    } catch(err) {
+        res.status(401).end()
+    }
+})
+
+/*
+    delete school
+*/
+router.delete("/admin/school/:id", adminMiddleware, async(req, res) => {
+    const school_id = req.params.id
+    try {
+        const deleteSchool = await home.deleteSchool(school_id)
+        if(deleteSchool) {
+            res.status(201).end()
+        }
+        else {
+            res.status(403).end()
+        }
+    } catch(err) {
+        res.status(401).end()
+    }
+})
+
+/*
+    update school
+*/
+router.put("/admin/school/:id", adminMiddleware, async(req, res) => {
+    const school_id = req.params.id
+    const { name, login, password } = req.body
+
+    
+    try {
+        const updateSchool = await home.updateSchool(school_id, name, login, password)
+        // console.log(updateSchool, );
+        if(updateSchool) {
+            res.status(201).end()
+        }
+        else {
+            res.status(403).end()
+        }
+    } catch(e) {
+        console.log(e);
+        res.status(403).end()
+    }
+})
 
 module.exports = router
