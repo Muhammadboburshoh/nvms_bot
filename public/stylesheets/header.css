@@ -380,3 +380,42 @@ body{
 .schools_link span {
   display: block;
 }
+
+.text-wrapper {
+  margin-bottom: 30px;
+}
+
+.upload-heading {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.upload-text {
+  display: block;
+  text-align: center;
+  margin-top: -15px;
+  /* margin-bottom: 20px; */
+  color: rgb(80, 78, 78);
+}
+
+.upload-input {
+  text-align: center;
+  cursor: pointer;
+  font-family: "Cairo","Arial",sans-serif;
+  width: 350px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 10px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.upload-btn {
+  margin-top: 20px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}

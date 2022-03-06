@@ -377,4 +377,29 @@ router.put("/admin/school/:id", adminMiddleware, async(req, res) => {
     }
 })
 
+/*
+    file upload method
+*/
+router.get("/upload", middleware, async(req, res) => {
+
+    const { access_token } = req.cookies.__auth
+    try {
+        if(access_token) {
+            const school = await verify(access_token)
+            if(school) {
+                res.render("upload", {site_host: site_host, name: school.name})
+            }
+            else {
+                res.status(401).end()
+            }
+        }
+        else {
+            res.status(401).end()
+        }
+    }
+    catch(err) {
+        res.status(401).end()
+    }
+})
+
 module.exports = router

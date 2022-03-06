@@ -79,22 +79,14 @@
       </header>
 
       <section class="main-content-wrapper">
-        <form class="category__create-form" action="/class" method="POST" enctype="application/x-www-form-urlencoded">
-          <label for="create-category">Sinf qo'shing: </label>
-          <input name="class_number" class="category__create-input" type="text" placeholder="Sinf nomi..." required />
-          <button class="category__create-btn" type="submit">Qo'shish</button>
+        <form class="category__create-form" action="/upload" method="POST" enctype="application/x-www-form-urlencoded">
+          <div class="text-wrapper">
+            <h3 class="upload-heading">O'quvchilarni keldi ketdi ro'yxatini yuklang</h3>
+            <span class="upload-text">(file NVMS ilovasidan chiqarib olingan EXCEL formatda bo'lishi kerak)</span>
+          </div>
+          <input name="class_number" class="upload-input" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required />
+          <button class="category__create-btn upload-btn" type="submit">Yuborish</button>
         </form>
-
-        <table class="categories__table">
-          <thead>
-            <tr class="categories__thead-tr">
-              <th class="categories__thead-th">Sinf nomi</th>
-              <th class="categories__thead-th">Tahrirlash</th>
-              <th class="categories__thead-th">O'chirish</th>
-            </tr>
-          </thead>
-          <tbody class="classes"></tbody>
-        </table>
       </section>
     </div>
   </div>
