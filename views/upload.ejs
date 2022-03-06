@@ -79,12 +79,12 @@
       </header>
 
       <section class="main-content-wrapper">
-        <form class="category__create-form" action="/upload" method="POST" enctype="application/x-www-form-urlencoded">
+        <form method="POST" action="/upload" enctype="multipart/form-data" class="category__create-form">
           <div class="text-wrapper">
             <h3 class="upload-heading">O'quvchilarni keldi ketdi ro'yxatini yuklang</h3>
             <span class="upload-text">(file NVMS ilovasidan chiqarib olingan EXCEL formatda bo'lishi kerak)</span>
           </div>
-          <input name="class_number" class="upload-input" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required />
+          <input class="upload-input" name="attendanceFile" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required />
           <button class="category__create-btn upload-btn" type="submit">Yuborish</button>
         </form>
       </section>
@@ -92,7 +92,7 @@
   </div>
 
   <script src="<%=site_host%>/javascripts/config.js"></script>
-  <script src="<%=site_host%>/javascripts/javascript.js"></script>
+  <!-- <script src="<%=site_host%>/javascripts/upload.js"></script> -->
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 const router = require("express").Router()
+const path = require("path")
 
 const home = require("./model")
 const { verify } = require("../../../util/jwt")
@@ -96,13 +97,14 @@ router.post("/class", middleware, async(req, res) => {
         try{
             const newClass = await home.createClass(class_number, school.school_id)
             if(newClass) {
+                // res.status(201).send("ABS")
                 res.render("successful", {site_host, url: "/"})
             }
             else{
-                res.status(401).end()
+                res.status(404).end()
             }
         }catch(err) {
-            res.status(401).end()
+            res.status(403).end()
         }
     }
     else {
@@ -117,7 +119,7 @@ router.get("/classes", middleware, async(req, res) => {
     const { school } = req.cookies.__auth
     if(school) {
         const classes = await home.selectClasses(school.school_id)
-        res.status(200).send(classes)
+        res.status(201).send(classes)
     }
     else {
         res.status(401).end()
@@ -201,7 +203,7 @@ router.post("/parent", middleware, async (req, res) => {
         try{
             const newParent = await home.createParent(phone, password, parent, class_id)
             if(newParent) {
-                res.render("successful", {site_host, url: "/"})
+                res.render("successful", {site_host, url: "/c/parents"})
             }
             else{
                 res.status(401).end()
@@ -361,10 +363,8 @@ router.put("/admin/school/:id", adminMiddleware, async(req, res) => {
     const school_id = req.params.id
     const { name, login, password } = req.body
 
-    
     try {
         const updateSchool = await home.updateSchool(school_id, name, login, password)
-        // console.log(updateSchool, );
         if(updateSchool) {
             res.status(201).end()
         }
@@ -378,7 +378,7 @@ router.put("/admin/school/:id", adminMiddleware, async(req, res) => {
 })
 
 /*
-    file upload method
+    file upload get html page
 */
 router.get("/upload", middleware, async(req, res) => {
 
@@ -399,6 +399,33 @@ router.get("/upload", middleware, async(req, res) => {
     }
     catch(err) {
         res.status(401).end()
+    }
+})
+
+/*
+    file upload post method
+*/
+router.post("/upload", async (req, res) => {
+    try {
+        let { attendanceFile } = req.files
+        const uploadFilePath = path.join(__dirname, "../", "../", "../", "../", "nvms_bot", "attendance_files", attendanceFile.name)
+
+        if(attendanceFile) {
+            const a = attendanceFile.mv(uploadFilePath, (err) =>{
+                if(!err) {
+                    res.render("successful", {site_host, url: "/upload"})
+                }
+                else {
+                    res.status(401).end()
+                }
+            })
+        }
+        else {
+            res.status(404).end()
+        }
+    }
+    catch(err) {
+        res.status(403).end()
     }
 })
 
