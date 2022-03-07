@@ -104,7 +104,16 @@ router.post("/class", middleware, async(req, res) => {
                 res.status(404).end()
             }
         }catch(err) {
-            res.status(403).end()
+            if(err.constraint === "class_index") {
+                res.send(`Bir xil sinf kiritayapsiz bu esa xato!
+                        <a class="go_home" href="/">
+                            <img src="${site_host}/images/pngwing.png" width="30" height="30" alt="">
+                            <span>Go Home</span>
+                        </a>`)
+            }
+            else {
+                res.status(403).end()
+            }
         }
     }
     else {
