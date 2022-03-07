@@ -13,12 +13,16 @@ const deleteBtns = document.querySelectorAll(".categories__delete-btn")
 
 for(let btn of deleteBtns) {
     btn.addEventListener("click", async () => {
-        let deleteRes = await fetch(`${HOST}/parent/` + btn.dataset.id, {
-            method: "DELETE"
-        })
+        let isRealy = confirm(`Ota-ona ma'lumotlarini o'chirishga ishonchingiz komilmi.\nOta-ona ma'lumotlarini o'chirsangiz unga bog'langan telagram accuntlarni ma'lumoti ham o'chib ketadi!`)
 
-        if(deleteRes.status > 200 && deleteRes.status < 300) {
-            location.href = `${HOST}/parents/${class_id}`
+        if(isRealy) {
+            let deleteRes = await fetch(`${HOST}/parent/` + btn.dataset.id, {
+                method: "DELETE"
+            })
+    
+            if(deleteRes.status > 200 && deleteRes.status < 300) {
+                location.href = `${HOST}/parents/${class_id}`
+            }
         }
     })
 }

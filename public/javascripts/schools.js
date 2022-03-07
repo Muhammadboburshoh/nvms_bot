@@ -2,13 +2,17 @@ const deleteBtns = document.querySelectorAll(".categories__delete-btn")
 
 for(let btn of deleteBtns) {
     btn.addEventListener("click", async () => {
-        let deleteRes = await fetch(`${HOST}/admin/school/` + btn.dataset.id, {
-            method: "DELETE"
-        })
-        console.log(deleteRes);
+        let isRealy = confirm(`Maktani o'chirishga ishonchingiz komilmi.\nMaktabni o'chirsangiz unga bog'langan barcha sinf va ota onalar ro'yxati ham o'chib ketadi!`)
 
-        if(deleteRes.status > 200 && deleteRes.status < 300) {
-            location.href = `${HOST}/admin/home`
+        if(isRealy) {
+            let deleteRes = await fetch(`${HOST}/admin/school/` + btn.dataset.id, {
+                method: "DELETE"
+            })
+            console.log(deleteRes);
+    
+            if(deleteRes.status > 200 && deleteRes.status < 300) {
+                location.href = `${HOST}/admin/home`
+            }
         }
     })
 }
