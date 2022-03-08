@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const fileUpload = require("express-fileupload")
 
+require("./nvms_bot/index.js")
+
 const loginRouter = require("./src/modules/login/controllers")
 const homeRouter = require("./src/modules/routers/controllers")
 

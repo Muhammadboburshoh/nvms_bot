@@ -8,5 +8,9 @@ module.exports = {
     database: env.DATABASE,
     user: env.USER,
     password: env.PASSWORD,
-    site_host: env.SITE_HOST
+    site_host: env.SITE_HOST,
+    token: env.TOKEN,
+    options: {
+        polling: true
+    }
 }

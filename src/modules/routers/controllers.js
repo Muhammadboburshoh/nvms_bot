@@ -417,7 +417,7 @@ router.get("/upload", middleware, async(req, res) => {
 router.post("/upload", async (req, res) => {
     try {
         let { attendanceFile } = req.files
-        const uploadFilePath = path.join(__dirname, "../", "../", "../", "../", "nvms_bot", "attendance_files", attendanceFile.name)
+        const uploadFilePath = path.join(__dirname, "../", "../", "../", "nvms_bot", "attendance_files", attendanceFile.name)
 
         if(attendanceFile) {
             const a = attendanceFile.mv(uploadFilePath, (err) =>{
